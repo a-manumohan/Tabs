@@ -1,23 +1,11 @@
 package com.mn.tabs.model
 
-import android.os.Parcel
-import android.os.Parcelable
-import paperparcel.PaperParcel
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
-@PaperParcel
-data class TabItem(
-        val amout: Double,
-        val timestamp: Long,
-        val note: String
-) : Parcelable {
-
-    companion object {
-        @JvmField val CREATOR = PaperParcelTabItem.CREATOR
-    }
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        PaperParcelTabItem.writeToParcel(this, dest, flags)
-    }
-}
+open class TabItem(
+        @PrimaryKey var id: Long = 0,
+        var amount: Double = 0.0,
+        var timestamp: Long = 0,
+        var note: String = ""
+) : RealmObject()
