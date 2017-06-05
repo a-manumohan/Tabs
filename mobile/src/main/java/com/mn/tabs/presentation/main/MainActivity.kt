@@ -9,7 +9,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), MainMvp.View {
 
     @Inject
-    var presenter: MainMvp.Presenter? = null
+    lateinit var presenter: MainMvp.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
