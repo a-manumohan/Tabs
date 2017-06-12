@@ -5,7 +5,7 @@ import com.mn.tabs.model.TabItem
 import io.realm.RealmResults
 
 interface TabPersister {
-    fun addTab(tab: Tab) : Tab
+    fun addTab(tab: Tab): Tab
 
     fun removeTab(tab: Tab)
 
@@ -14,4 +14,6 @@ interface TabPersister {
     fun removeItem(tab: Tab, item: TabItem)
 
     fun getAllTabs(): RealmResults<Tab>
+
+    fun getTab(id: Long): Tab
 }

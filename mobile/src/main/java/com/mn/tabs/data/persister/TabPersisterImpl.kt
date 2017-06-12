@@ -43,4 +43,10 @@ class TabPersisterImpl(val realm: Realm) : TabPersister {
         return realm.where(Tab::class.java)
                 .findAllSorted("timestamp", Sort.DESCENDING)
     }
+
+    override fun getTab(id: Long): Tab {
+        return realm.where(Tab::class.java)
+                .equalTo("id", id)
+                .findFirst()
+    }
 }
