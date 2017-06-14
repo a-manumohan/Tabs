@@ -9,7 +9,7 @@ interface TabPersister {
 
     fun removeTab(tab: Tab)
 
-    fun addItem(tab: Tab, item: TabItem)
+    fun addItem(tab: Tab, amount: Double, note: String, timestamp: Long)
 
     fun removeItem(tab: Tab, item: TabItem)
 

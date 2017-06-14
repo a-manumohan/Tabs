@@ -8,6 +8,7 @@ import io.realm.Sort
 import java.util.*
 
 class TabPersisterImpl(val realm: Realm) : TabPersister {
+
     override fun addTab(name: String, timestamp: Long): Tab {
         realm.beginTransaction()
         val realmTab = realm.createObject(Tab::class.java, getUniqueTabId())
@@ -18,18 +19,21 @@ class TabPersisterImpl(val realm: Realm) : TabPersister {
     }
 
     override fun removeTab(tab: Tab) {
-        realm.beginTransaction()
-        val realmTab = realm.where(Tab::class.java)
-                .equalTo("id", tab.id)
-                .findFirst()
-        realmTab.deleteFromRealm()
-        realm.commitTransaction()
+        realm.executeTransaction {
+            val realmTab = realm.where(Tab::class.java)
+                    .equalTo("id", tab.id)
+                    .findFirst()
+            realmTab.deleteFromRealm()
+        }
     }
 
-    override fun addItem(tab: Tab, item: TabItem) {
+    override fun addItem(tab: Tab, amount: Double, note: String, timestamp: Long) {
         realm.executeTransaction {
-            val realmItem = realm.copyFromRealm(item)
-            tab.items.add(realmItem)
+            val tabItem = realm.createObject(TabItem::class.java, getUniqueItemId())
+            tabItem.amount = amount
+            tabItem.note = note
+            tabItem.timestamp = timestamp
+            tab.items.add(tabItem)
         }
     }
 
@@ -55,6 +59,10 @@ class TabPersisterImpl(val realm: Realm) : TabPersister {
 
 
     private fun getUniqueTabId(): String {
+        return UUID.randomUUID().toString()
+    }
+
+    private fun getUniqueItemId(): String {
         return UUID.randomUUID().toString()
     }
 }

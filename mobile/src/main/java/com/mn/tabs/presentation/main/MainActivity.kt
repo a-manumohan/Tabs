@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import com.mn.tabs.R
 import com.mn.tabs.TabsApplication
+import com.mn.tabs.presentation.main.adapter.TabsAdapter
 import com.mn.tabs.presentation.main.dialog.AddTabDialog
 import com.mn.tabs.presentation.main.view.AddTabView
+import com.mn.tabs.presentation.main.viewmodel.PresentationTab
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity(), MainMvp.View {
         setContentView(R.layout.activity_main)
         setupDi()
         setupListeners()
+        presenter.onReady()
     }
 
     private fun setupDi() {
@@ -40,6 +43,10 @@ class MainActivity : AppCompatActivity(), MainMvp.View {
         val addTabDialog = AddTabDialog()
         addTabDialog.onTabAdded { name -> presenter.onTabAdded(name) }
         addTabDialog.show(supportFragmentManager, "add_tab")
+    }
+
+    override fun showTabsList(tabs: List<PresentationTab>) {
+        tabs_listview.bind(tabs)
     }
     //endregion
 }
