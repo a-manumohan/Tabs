@@ -5,8 +5,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.mn.tabs.R
+import kotlinx.android.synthetic.main.view_add_tab.view.*
 
-class TotalView : FrameLayout {
+class AddTabView : FrameLayout {
     constructor(context: Context) : super(context) {
         init(context)
     }
@@ -19,10 +20,17 @@ class TotalView : FrameLayout {
         init(context)
     }
 
-
     private fun init(context: Context) {
-        View.inflate(context, R.layout.view_main_total, this)
+        View.inflate(context, R.layout.view_add_tab, this)
         if (!isInEditMode) {
         }
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        setupListeners()
+    }
+    private fun setupListeners() {
+        add_tab.setOnClickListener {  }
     }
 }

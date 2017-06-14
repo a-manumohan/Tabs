@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Tabs</string>
     <string name="you_owe">You owe</string>
+    <string name="hint_name">Name</string>
+    <string name="add_a_new_tab">Add a new Tab</string>
+    <string name="add">Add</string>
 </resources>

@@ -6,7 +6,7 @@ class MainPresenter(
         val view: MainMvp.View,
         val realm: Realm
 ) : MainMvp.Presenter {
-    override fun addTabClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onAddTabClicked() {
+      view.showNewTabDialog()
     }
 }
