@@ -6,6 +6,9 @@ class MainPresenter(
         val view: MainMvp.View,
         val realm: Realm
 ) : MainMvp.Presenter {
+    override fun onTabAdded(name: String) {
+    }
+
     override fun onAddTabClicked() {
       view.showNewTabDialog()
     }

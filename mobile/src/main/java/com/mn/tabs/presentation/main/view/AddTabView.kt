@@ -8,6 +8,8 @@ import com.mn.tabs.R
 import kotlinx.android.synthetic.main.view_add_tab.view.*
 
 class AddTabView : FrameLayout {
+    lateinit var addTabViewListener: (String) -> Unit?
+
     constructor(context: Context) : super(context) {
         init(context)
     }
@@ -30,7 +32,19 @@ class AddTabView : FrameLayout {
         super.onFinishInflate()
         setupListeners()
     }
+
     private fun setupListeners() {
-        add_tab.setOnClickListener {  }
+        add_tab.setOnClickListener {
+            addTabViewListener.invoke(tab_name.text.toString().trim())
+        }
+    }
+
+
+    fun onAddClicked(listener: (String) -> Unit) {
+        this.addTabViewListener = listener
+    }
+
+    interface AddTabViewListener {
+        fun onTabAdded(name: String)
     }
 }

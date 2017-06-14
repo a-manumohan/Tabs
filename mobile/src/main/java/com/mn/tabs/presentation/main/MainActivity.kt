@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity(), MainMvp.View {
     //region view methods
     override fun showNewTabDialog() {
         val addTabDialog = AddTabDialog()
-        addTabDialog.show(supportFragmentManager, "add")
+        addTabDialog.onTabAdded { name -> presenter.onTabAdded(name) }
+        addTabDialog.show(supportFragmentManager, "add_tab")
     }
     //endregion
 }
