@@ -5,11 +5,14 @@ import com.mn.tabs.model.TabItem
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
+import java.util.*
 
 class TabPersisterImpl(val realm: Realm) : TabPersister {
-    override fun addTab(tab: Tab): Tab {
+    override fun addTab(name: String, timestamp: Long): Tab {
         realm.beginTransaction()
-        val realmTab = realm.copyFromRealm(tab)
+        val realmTab = realm.createObject(Tab::class.java, getUniqueTabId())
+        realmTab.name = name
+        realmTab.timestamp = timestamp
         realm.commitTransaction()
         return realmTab
     }
@@ -48,5 +51,10 @@ class TabPersisterImpl(val realm: Realm) : TabPersister {
         return realm.where(Tab::class.java)
                 .equalTo("id", id)
                 .findFirst()
+    }
+
+
+    private fun getUniqueTabId(): String {
+        return UUID.randomUUID().toString()
     }
 }

@@ -5,7 +5,7 @@ import com.mn.tabs.model.TabItem
 import io.realm.RealmResults
 
 interface TabPersister {
-    fun addTab(tab: Tab): Tab
+    fun addTab(name: String, timestamp: Long): Tab
 
     fun removeTab(tab: Tab)
 
